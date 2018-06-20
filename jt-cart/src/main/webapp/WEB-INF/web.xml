@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="jt-manage" version="2.5">
+	<display-name>jt-cart</display-name>
+	<!-- spring和SpringMVC的总结 
+		配置方式：
+		1.通过前端控制器直接扫描全部容器
+		2.通过监听器的方式启动spring容器
+		
+		差别：
+		第一种：如果springMVC和spring的配置文件都是通过前端控制器扫描，则容器的启动时懒加载的。
+		              只有浏览器发出请求后，前端控制器才会启动spring容器和springMVC容器。
+		   弊端:如果是大型项目用户访问时，这时后台容器才会启动，会导致用户等待时间较长.
+		              耗费时间主要在等待容器启动。
+		              
+		第二种：通过监听器的方式启动spring容器，当tomcat启动时，监听器就会监听是否需要spring容器，
+				如果监听器检查到需要spring容器，则监听器会在后台启动spring容器。
+				(tomcat启动时spring容器已经加载完成)
+				当用户通过浏览器访问时，首先将请求发给springMVC，spirngMVC通过spring容器获取具体的对象
+				直接完成业务调用。用户不需要等待容器启动。
+		      
+	-->
+	<!-- 配置监听器启动sping容器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/spring/applicationContext*.xml</param-value>
+	</context-param>
+	
+	<!-- 1.配置前端控制器 -->
+	<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+	<servlet>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 配置加载SpringMVC.xml -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/spring/springmvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<!-- 
+			/ 规定
+			  1 表示拦截全部的请求
+			  2 拦截所有静态资源js/css/image 后期配置放行
+			  3 放行jsp资源 
+		-->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 配置全站乱码解决POST乱码 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

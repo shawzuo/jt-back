@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 唯一标识映射文件 -->
+<mapper namespace="com.jt.cart.mapper.CartMapper">
+	<!-- 根据userId和ItemId修改购物车的数量 -->
+	<update id="updateNum">
+		update tb_cart set num=#{num} where user_id=#{userId} and item_id=#{itemId}
+	</update>
+	<select id="findCartByUserIdAndItemId" resultType="cart">
+		select * from tb_cart where user_id=#{userId} and item_id=#{itemId}
+	</select>
+	
+	
+</mapper>

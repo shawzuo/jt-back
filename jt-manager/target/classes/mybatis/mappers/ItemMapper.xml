@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 唯一标识映射文件 -->
+<mapper namespace="com.jt.manager.mapper.ItemMapper">
+	
+	<!-- 业务：
+			注意事项:所有的sql一定要小写(mysql数据库)
+			原因:linux中严格区分大小写
+	 -->
+	<select id="findAll" resultType="item">
+		select * from tb_item
+		order by updated desc
+	</select>
+	<select id="findItemCount" resultType="int">
+		select count(1) from tb_item
+	</select>
+	<select id="findItemByPage" resultType="item">
+		select * from tb_item
+		order by updated desc
+		limit #{begin},#{rows}
+	</select>
+	<select id="findItemCatNameById" resultType="string">
+		select name from tb_item_cat
+		where id = #{itemCatid}
+	</select>
+	<!-- 增、删、该 不用写参数类型 parameterType=""，让软件自己反射 -->
+	<!-- 批量修改状态  
+			collection规则：
+				1.如果传递的数据为list集合，则collection="list"
+				2.如果传递的数据为array，     则collection="array"
+				3.如果传递的数据为map，         则collection="map中的key"
+				
+	-->
+	<update id="updateStatus" >
+		update tb_item set status = #{status}
+		where id in ( 
+		<foreach collection="ids" item="id" separator=",">
+			#{id}
+		</foreach>
+		)
+	</update>
+	
+</mapper>

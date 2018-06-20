@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 唯一标识映射文件 -->
+<mapper namespace="com.jt.manager.mapper.UserMapper">
+	
+	<!-- 别名包在spring中定义 -->
+	<select id="findAll" resultType="user">
+		select * from t_user
+	</select>
+	<!--根据分类ID查询分类名称  -->
+	<select id="findItemCatName" resultType="string">
+		SELECT NAME FROM tb_item_cat WHERE id = #{itemId}
+	</select>
+</mapper>

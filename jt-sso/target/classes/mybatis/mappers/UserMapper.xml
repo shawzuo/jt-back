@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 唯一标识映射文件 -->
+<mapper namespace="com.jt.sso.mapper.UserMapper">
+
+	<!-- 使用#获取数据的值，一般建议使用，因为有预编译的效果。
+		$使用时，只会出现在以列名为参数的应用。
+		能用#时就不用$ -->
+	<select id="findCheckUser" resultType="int">
+		select count(*) from tb_user where ${cloumn} = #{param}
+	</select>
+	<select id="selectUserByUP" resultType="user"> 
+		select * from tb_user where username = #{username} and password = #{password}
+	</select>
+	
+	
+</mapper>

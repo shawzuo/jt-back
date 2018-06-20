@@ -1,0 +1,4 @@
+127.0.0.1 - - [06/Feb/2018:09:25:10 +0800] "GET /cart/query/3 HTTP/1.0" 200 280 http-bio-8094-exec-1 385
+127.0.0.1 - - [06/Feb/2018:09:25:13 +0800] "GET /cart/update/num/3/1474391992/9 HTTP/1.0" 200 47 http-bio-8094-exec-2 54
+127.0.0.1 - - [06/Feb/2018:09:25:15 +0800] "GET /cart/query/3 HTTP/1.0" 200 280 http-bio-8094-exec-3 7
+127.0.0.1 - - [06/Feb/2018:09:45:50 +0800] "GET /cart/query/3 HTTP/1.0" 200 280 http-bio-8094-exec-4 7

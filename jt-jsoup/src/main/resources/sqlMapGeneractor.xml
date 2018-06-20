@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	
+	<properties resource="generatorConfig.properties"/>
+	
+	<classPathEntry location="D:\WorkJarSource\connDriver\mysql-connector-java-5.1.10-bin.jar" />
+	
+	<context id="tarena">
+		
+		<commentGenerator>
+			<property name="suppressAllComments" value="${suppressAllComments}"/>
+		</commentGenerator>
+		<jdbcConnection driverClass="${driverClass}" connectionURL="${url}" userId="${username}" password="${password}" />
+	
+		<javaModelGenerator targetPackage="${modeltargetPackage}" targetProject="${targetProject}" />
+		
+		<sqlMapGenerator targetPackage="${sqltargetPackage}" targetProject="${targetProject}" />	
+		<javaClientGenerator targetPackage="${clienttargetPackage}" targetProject="${targetProject}" type="XMLMAPPER" /> 
+
+		
+		<table schema="jdbc" tableName="student_book" />
+		<table schema="jdbc" tableName="student_section" />
+		
+		<!-- 如果需要为表自动生成代码，只需要在tableName中添加表名称，如果是多张表则添加多个标签 -->
+		<!--
+			<table schema="" tableName="order_c" />
+			<table schema="" tableName="order_c" />
+		-->
+		
+	</context>
+</generatorConfiguration>
